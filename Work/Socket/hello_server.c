@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 {
 	int serv_sock;
 	int clnt_sock;
+	char buf[1024];
 
 	struct sockaddr_in serv_addr;
 	struct sockaddr_in clnt_addr;
@@ -52,6 +53,9 @@ int main(int argc, char *argv[])
 		error_handling("accept() error");
 	}
 
+	read(clnt_sock, buf, sizeof(buf));
+	printf("%s\n", buf);
+	
 	write(clnt_sock, message, sizeof(message));
 	close(clnt_sock);
 	close(serv_sock);
